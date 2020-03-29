@@ -1,0 +1,9 @@
+<ng-container *ngIf="loading; then loadingTemplate; else loadedTemplate"></ng-container>
+<ng-template #loadingTemplate>
+  <mat-spinner></mat-spinner>
+</ng-template>
+<ng-template #loadedTemplate>
+  <mat-list>
+    <app-film-list-item *ngFor="let film of films" [film]="film"></app-film-list-item>
+  </mat-list>
+</ng-template>

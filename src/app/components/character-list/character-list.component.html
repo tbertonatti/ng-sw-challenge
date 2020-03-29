@@ -1,0 +1,50 @@
+<ng-container *ngIf="loading; then loadingTemplate; else loadedTemplate"></ng-container>
+<ng-template #loadingTemplate>
+  <mat-spinner></mat-spinner>
+</ng-template>
+<ng-template #loadedTemplate>
+  <ng-container *ngIf="film; then filmTemplate; else noFilmTemplate"></ng-container>
+  <ng-template #filmTemplate>
+    <h3>
+      Characters that appear in
+      <app-film-trigger [film]="film"></app-film-trigger>
+    </h3>
+  </ng-template>
+  <ng-template #noFilmTemplate>
+    <h3>Characters</h3>
+  </ng-template>
+  <p *ngIf="!film">These filters only applies to the current characters listed</p>
+  <mat-form-field>
+    <mat-label>Filter by gender</mat-label>
+    <mat-select (selectionChange)="setFilter('gender', $event.value)">
+      <mat-option [value]="''">clear</mat-option>
+      <mat-option *ngFor="let gender of possibleFilters.gender" [value]="gender.value">
+        {{gender.value}} ({{gender.count}})
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Filter by eye color</mat-label>
+    <mat-select (selectionChange)="setFilter('eye_color', $event.value)">
+      <mat-option [value]="''">clear</mat-option>
+      <mat-option *ngFor="let eye_color of possibleFilters.eye_color" [value]="eye_color.value">
+        {{eye_color.value}} ({{eye_color.count}})
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field *ngIf="!film">
+    <mat-label>Filter by film</mat-label>
+    <mat-select (selectionChange)="setFilter('film', $event.value)">
+      <mat-option [value]="''">clear</mat-option>
+      <mat-option *ngFor="let film of possibleFilters.film" [value]="film.value">
+        {{film.value}} ({{film.count}})
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-list>
+    <app-character-list-item *ngFor="let character of filteredCharacters" [character]="character">
+    </app-character-list-item>
+  </mat-list>
+  <mat-paginator showFirstLastButtons [length]="count" [pageIndex]="page - 1" [pageSize]="10"
+    (page)="changePage($event)"></mat-paginator>
+</ng-template>

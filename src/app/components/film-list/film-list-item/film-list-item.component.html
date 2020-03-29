@@ -1,0 +1,10 @@
+<mat-list-item>
+  <mat-icon mat-list-icon>movie</mat-icon>
+  <h4 mat-line>
+    Episode {{film.episode_roman}}
+    <app-film-trigger [film]="film"></app-film-trigger>
+    <a mat-button color="primary" (click)="goToFilmCharacters(film.url)">Characters</a>
+  </h4>
+  <p mat-line> {{film.director}} </p>
+</mat-list-item>
+<mat-divider></mat-divider>

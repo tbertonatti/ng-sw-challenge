@@ -1,0 +1,13 @@
+<div *ngIf="show">
+  <div class="fade"></div>
+  <button mat-button color="primary" (click)="show = false">Close (automatic close in {{seconds}})</button>
+  <section class="star-wars">
+    <div class="crawl">
+      <div class="title">
+        <p>Episode {{id}}</p>
+        <h1>{{title}}</h1>
+      </div>
+      <pre>{{text}}</pre>
+    </div>
+  </section>
+</div>
